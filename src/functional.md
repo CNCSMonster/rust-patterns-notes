@@ -83,13 +83,13 @@ println!("{}", (1..11).fold(0, |a, b| a + b));
 
 | 特性 | Java | C++ | Rust |
 |------|------|-----|------|
-| **实现机制** | 类型擦除（Type Erasure） | 模板单体化 | 泛型单体化 |
-| **运行时泛型信息** | ❌ 无（擦除为 Object） | ❌ 无 | ❌ 无 |
-| **代码生成** | 一份代码，运行时转换 | 每个类型生成一份 | 每个类型生成一份 |
-| **二进制大小** | ✅ 小 | ❌ 大 | ❌ 大 |
-| **运行效率** | ⚠️ 有类型转换开销 | ✅ 无间接层 | ✅ 无间接层 |
-| **特化方法** | ❌ 不支持 | ✅ 模板特化 | ✅ 多个 `impl` 块 |
-| **类型安全** | 编译时 + 运行时转换 | 编译时 | 编译时 |
+| 实现机制 | 类型擦除 | 模板单体化 | 泛型单体化 |
+| 运行时泛型信息 | ❌ 无 | ❌ 无 | ❌ 无 |
+| 代码生成 | 1 份代码，运行时转换 | 每类型 1 份 | 每类型 1 份 |
+| 二进制大小 | ✅ 小 | ❌ 大 | ❌ 大 |
+| 运行效率 | ⚠️ 有转换开销 | ✅ 无间接层 | ✅ 无间接层 |
+| 特化方法 | ❌ 不支持 | ✅ 模板特化 | ✅ 多 impl 块 |
+| 类型安全 | 编译时 + 运行时 | 编译时 | 编译时 |
 
 **验证结论**:
 
@@ -309,10 +309,10 @@ pub trait Visitor<'de> {
 **为什么需要 MapAccess**：
 
 | 问题 | 没有 MapAccess | 有 MapAccess |
-|------|---------------|--------------|
-| **耦合度** | Visitor 绑定具体 Deserializer | Visitor 只依赖 trait |
-| **实现次数** | N 类型 × M 格式 = N×M 次 | N 类型 + M 格式 = N+M 次 |
-| **解析方式** | 一次性加载所有数据 | 按需解析，流式支持 |
+|------|----------------|---------------|
+| 耦合度 | Visitor 绑定具体 Deserializer | Visitor 只依赖 trait |
+| 实现次数 | N 类型 × M 格式 = N×M 次 | N 类型 + M 格式 = N+M 次 |
+| 解析方式 | 一次性加载所有数据 | 按需解析，流式支持 |
 
 **MapAccess trait 定义**：
 
@@ -331,18 +331,18 @@ pub trait MapAccess<'de> {
 
 **类型约束关系**：
 
-| 类型参数 | 级别 | 绑定到 | 谁决定 |
+| 类型参数 | 级别 | 绑定到 | 决定方 |
 |----------|------|--------|--------|
-| `'de` | trait 级 | `MapAccess<'de>` | Deserializer 实现 |
-| `type Error` | 关联类型 | `MapAccess` 实现 | Deserializer 实现 |
-| `V` (visit_map 的泛型) | 方法级 | `visit_map` 方法 | Deserializer 调用时 |
-| `K` (next_key 的泛型) | 方法级 | `next_key` 方法 | Visitor 调用时 |
-| `V` (next_value 的泛型) | 方法级 | `next_value` 方法 | Visitor 调用时 |
+| `'de` | trait 级 | `MapAccess<'de>` | Deserializer |
+| `type Error` | 关联类型 | `MapAccess` | Deserializer |
+| `V` (visit_map) | 方法级 | `visit_map` | Deserializer |
+| `K` (next_key) | 方法级 | `next_key` | Visitor |
+| `V` (next_value) | 方法级 | `next_value` | Visitor |
 
-**具体实现**（由 Deserializer 决定）：
+**具体实现**：
 
 | 格式库 | `V` 的具体类型 |
-|--------|---------------|
+|--------|----------------|
 | serde_json | `JsonMapAccess<'de>` |
 | serde_yaml | `YamlMapAccess<'de>` |
 | serde_cbor | `CborMapAccess<'de>` |
@@ -369,10 +369,10 @@ let user: User = serde_json::from_str(json)?;
 
 | 组件 | 职责 | 不关心 |
 |------|------|--------|
-| **Deserialize** | 知道如何构造自己 | 数据格式 |
-| **Visitor** | 定义构造步骤 | 数据格式 |
-| **Deserializer** | 解析格式，驱动 Visitor | 目标类型 |
-| **MapAccess** | 抽象 map 访问接口 | 具体格式 |
+| Deserialize | 知道如何构造自己 | 数据格式 |
+| Visitor | 定义构造步骤 | 数据格式 |
+| Deserializer | 解析格式，驱动 Visitor | 目标类型 |
+| MapAccess | 抽象 map 访问接口 | 具体格式 |
 
 **优势**：N 个数据类型 × M 个格式 = N + M 次实现（而非 N×M）
 
