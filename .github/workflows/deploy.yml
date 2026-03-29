@@ -30,7 +30,6 @@ jobs:
 
       - name: Build book
         run: |
-          cd rust-patterns-notes
           mdbook-zh-search build
 
       - name: Setup Pages
@@ -39,7 +38,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./rust-patterns-notes/book
+          path: ./book
 
       - name: Deploy to GitHub Pages
         id: deployment
