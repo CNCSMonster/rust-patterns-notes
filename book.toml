@@ -1,0 +1,27 @@
+[book]
+title = "Rust Patterns 学习笔记"
+authors = ["Study Notes"]
+description = "Rust Unofficial Patterns 中文学习笔记"
+language = "zh-CN"
+src = "src"
+
+[build]
+create-missing = false
+
+[rust]
+edition = "2024"
+
+[output.html]
+smart-punctuation = true
+default-theme = "light"
+site-url = "/rust-patterns-notes/"
+git-repository-url = "https://github.com/YOUR_USERNAME/rust-patterns-notes"
+edit-url-template = "https://github.com/YOUR_USERNAME/rust-patterns-notes/edit/main/src/{path}"
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.playground]
+editable = true
+copyable = true
