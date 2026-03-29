@@ -24,11 +24,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install mdBook
+      - name: Install mdBook and mdbook-zh-search
         run: |
-          curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall.sh | sh
-          cargo binstall --no-confirm mdbook
-          cargo binstall --no-confirm mdbook-zh-search
+          cargo install mdbook
+          cargo install mdbook-zh-search
 
       - name: Build book
         run: |
