@@ -192,36 +192,41 @@ let config = Config {
 
 ### 核心原则
 
-**集合类型是"拥有者句柄"，赋值=Move，传参用借用。**
+**部分集合类型（`Vec`, `String`）实现了 `Deref` trait，像智能指针一样自动解引用到借用视图。**
 
 ### 关键理解
 
 ```rust
-// ✅ Move 语义
-let v1 = vec![1, 2, 3];
-let v2 = v1;  // v1 失效
+// ✅ Vec 实现了 Deref<Target=[T]>，自动解引用到 slice
+let v: Vec<i32> = vec![1, 2, 3];
+let s: &[i32] = &v;  // 自动 Deref: &Vec → &[T]
+v.len();             // 实际调用的是 <[T]>::len()
 
-// ✅ 传参用借用
-fn process_vec(v: &[i32]) { }
-fn process_map(m: &HashMap<String, i32>) { }
+// ✅ String 实现了 Deref<Target=str>，自动解引用到 &str
+let s: String = String::from("hello");
+let slice: &str = &s;  // 自动 Deref: &String → &str
 
-// ✅ 需要拷贝显式 clone
-let v3 = v2.clone();
+// ❌ HashMap 没有实现 Deref，不能自动解引用
+use std::collections::HashMap;
+let mut map: HashMap<String, i32> = HashMap::new();
+// &map 仍然是 &HashMap，没有借用视图类型
 ```
 
 ### 类型对比
 
-| 类型 | Move 语义 | Deref | 说明 |
-|------|-----------|-------|------|
-| `Vec<T>` | ✅ | ✅ → `[T]` | 真正的智能指针 |
-| `String` | ✅ | ✅ → `str` | 真正的智能指针 |
-| `HashMap<K,V>` | ✅ | ❌ | 只有 Move 语义 |
+| 类型 | `Deref` 实现 | 借用视图 | 智能指针行为 |
+|------|-------------|----------|-------------|
+| `Vec<T>` | ✅ `Deref<Target=[T]>` | `&[T]` (slice) | ✅ 自动解引用 |
+| `String` | ✅ `Deref<Target=str>` | `&str` | ✅ 自动解引用 |
+| `HashMap<K,V>` | ❌ | 无 | ❌ 仅普通借用 |
+| `Box<T>` | ✅ `Deref<Target=T>` | `&T` | ✅ 智能指针 |
 
 ### 关键总结
 
-- 集合赋值 = Move（不是 Copy）
-- 函数参数用 `&Collection`
-- 需要拷贝用 `.clone()`
+- **智能指针集合**：`Vec`, `String` 实现 `Deref`，自动解引用到借用视图
+- **非智能指针集合**：`HashMap`, `BTreeMap` 等没有 `Deref`
+- **API 设计**：方法通常实现在借用视图上（如 `slice::len()`），`Vec` 通过 `Deref` 复用
+- **传参建议**：函数参数用借用类型（`&[T]`, `&str`）而非拥有者类型
 
 ---
 
