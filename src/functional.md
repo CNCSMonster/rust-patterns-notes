@@ -153,10 +153,11 @@ impl FileDownloadRequest<Nfs> {
 ```
 
 **使用效果**：
+
 ```rust
 // ❌ 编译错误：Bootp 没有 mount_point() 方法
 let request: FileDownloadRequest<Bootp> = ...;
-request.mount_point();  // 编译错误！
+request.mount_point();  // ❌ 编译错误！
 ```
 
 **优势**：

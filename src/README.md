@@ -27,6 +27,8 @@
 
 ## 📚 完整目录结构
 
+> **📝 编号说明**：原文没有数字编号，笔记中的编号（如 2.1、3.1.1）是为了方便引用而自创的，与原文章节名称对应关系见下表。
+
 ### 1. Introduction（引言）
 - 1.1 Translations（翻译版本）
 
@@ -138,8 +140,8 @@
 | Design Patterns - FFI | 2 |
 | Anti-Patterns | 3 |
 | Functional Programming | 3 |
-| Additional Resources | 1 |
-| **总计** | **36** |
+| Additional Resources | 2 |
+| **总计** | **37** |
 
 ---
 
@@ -154,6 +156,28 @@
 
 - 官方网站：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/)
 - GitHub 仓库：[rust-unofficial/patterns](https://github.com/rust-unofficial/patterns)
+
+---
+
+## 📖 术语表
+
+| 英文 | 中文翻译 | 说明 |
+|------|----------|------|
+| Idioms | 习惯用法 | Rust 社区的编码规范和最佳实践 |
+| Design Patterns | 设计模式 | 解决常见编程问题的经典方法 |
+| Anti-Patterns | 反模式 | 应该避免的错误做法 |
+| Borrow Checker | 借用检查器 | Rust 编译器中负责检查借用规则的组件 |
+| Trait | trait | Rust 中的接口/特征机制（不翻译） |
+| Monomorphization | 单体化 | 编译时为每个具体类型生成独立代码 |
+| Smart Pointer | 智能指针 | 拥有堆分配数据所有权的类型（如 `Vec`, `String`） |
+| RAII | RAII | 资源获取即初始化，Rust 的资源管理模式 |
+| FFI | FFI | 外部函数接口（Foreign Function Interface） |
+| Closure | 闭包 | 捕获环境变量的匿名函数 |
+| Iterator | 迭代器 | 支持 `iter()`, `map()`, `fold()` 等链式调用的类型 |
+| Ownership | 所有权 | Rust 的内存管理机制 |
+| Move Semantics | Move 语义 | 赋值时转移所有权而非拷贝 |
+| Deref | Deref | 解引用 trait，用于智能指针 |
+| Drop | Drop | 析构 trait，用于资源清理 |
 
 ---
 

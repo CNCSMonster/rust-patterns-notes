@@ -1,6 +1,6 @@
 # 补充资源笔记 - Refactoring & Design Principles
 
-> 学习来源：[Rust Patterns - Additional Resources](https://rust-unofficial.github.io/patterns/additional.html)
+> 来源：[Rust Patterns - Additional Resources](https://rust-unofficial.github.io/patterns/additional.html)
 >
 > 原文版本：`main@f279f35` (2026-03-29 查验)
 >
@@ -11,7 +11,7 @@
 ## 📋 设计原则速查表
 
 | # | 缩写 | 全称 | 一句话介绍 |
-|---|------|------|-----------|
+|------|------|------|-----------|
 | 1 | SRP | Single Responsibility Principle | 一个模块只有一个引起它变化的原因 |
 | 2 | OCP | Open/Closed Principle | 对扩展开放，对修改关闭 |
 | 3 | LSP | Liskov Substitution Principle | Rust 中体现为实现同一 trait 的类型应遵守 trait 的语义约定 |
