@@ -541,7 +541,7 @@ Persistence-Closure
 
 | 资源 | 链接 |
 |------|------|
-| The Rust API Guidelines | https://rust-lang.github.io/api-guidelines |
+| The Rust API Guidelines | [https://rust-lang.github.io/api-guidelines](https://rust-lang.github.io/api-guidelines) |
 
 ---
 

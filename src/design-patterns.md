@@ -1,6 +1,6 @@
 # Rust Design Patterns 学习笔记
 
-> 来源：https://rust-unofficial.github.io/patterns/patterns.html
+> 来源：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/patterns.html)
 >
 > 部分：Part 2 - Design Patterns (设计模式)
 

@@ -1,6 +1,6 @@
 # Rust Anti-Patterns 学习笔记
 
-> 来源：https://rust-unofficial.github.io/patterns/anti-patterns.html
+> 来源：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/anti-patterns.html)
 >
 > 部分：Part 3 - Anti-Patterns (反模式)
 

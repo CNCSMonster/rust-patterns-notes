@@ -1,6 +1,6 @@
 # Rust Functional Programming 学习笔记
 
-> 来源：https://rust-unofficial.github.io/patterns/functional-intro.html
+> 来源：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/functional-intro.html)
 >
 > 部分：Part 4 - Functional Programming (函数式编程)
 

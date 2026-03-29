@@ -1,6 +1,6 @@
 # Rust Design Patterns - 整体结构梳理
 
-> 来源：https://rust-unofficial.github.io/patterns/
+> 来源：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/)
 >
 > 整理日期：2026-03-22
 > 完成日期：2026-03-29
@@ -150,8 +150,8 @@
 
 ## 🔗 相关链接
 
-- 官方网站：https://rust-unofficial.github.io/patterns/
-- GitHub 仓库：https://github.com/rust-unofficial/patterns
+- 官方网站：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/)
+- GitHub 仓库：[rust-unofficial/patterns](https://github.com/rust-unofficial/patterns)
 
 ---
 
