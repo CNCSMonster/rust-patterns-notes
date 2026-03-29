@@ -55,7 +55,7 @@
 
 ### 3.1.1 Command
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：把请求封装成对象，Rust 中用 trait 或闭包实现。
 
@@ -85,7 +85,7 @@ let cmds: Vec<Cmd> = vec![...];
 
 ### 3.1.2 Interpreter
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：用枚举 + 递归实现 DSL 解释器。
 
@@ -127,7 +127,7 @@ impl Expr {
 
 ### 3.1.3 Newtype
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：用元组结构体包装类型，获得类型安全和自定义能力。
 
@@ -167,7 +167,7 @@ Email::new("test@example.com")?;  // 创建即保证有效
 
 ### 3.1.4 RAII Guards
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：用守卫对象在作用域结束时自动释放资源。
 
@@ -201,7 +201,7 @@ let guard = ScopeGuard::new(|| cleanup());
 
 ### 3.1.5 Strategy
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：定义可互换的算法族，Rust 中用 trait 实现。
 
@@ -251,7 +251,7 @@ run_strategy(&|| println!("Hello"));
 
 ### 3.1.6 Visitor
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：Visitor 封装了一个操作异构对象集合的算法，可以在不修改数据的情况下添加新算法。
 
@@ -339,7 +339,7 @@ impl<'de> Visitor<'de> for MyTypeVisitor {
 
 ### 3.2.1 Builder
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：用 builder helper 构造对象，解决 Rust 无构造函数重载/默认参数的问题。
 
@@ -396,7 +396,7 @@ struct Foo {
 
 ### 3.2.2 Fold
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：对 AST 递归转换，创建新数据结构。
 
@@ -456,7 +456,7 @@ impl VisitMut for MyTransform {
 
 ### 3.3.1 Compose Structs
 
-> **状态**: ✅ 已完成（⚠️ 原文有批评）
+> 状态：已完成（⚠️ 原文有批评）
 
 **核心**：将大结构体拆分成多个小结构体再组合，实现独立借用字段。
 
@@ -508,7 +508,7 @@ let y = &d.b;  // 完全可以
 
 ### 3.3.2 Prefer Small Crates
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：优先使用小而专注的 crate，每个 crate 做好一件事。
 
@@ -569,7 +569,7 @@ my-lib/
 
 ### 3.3.3 Contain unsafety in small modules
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：将 `unsafe` 代码限制在尽可能小的模块内，构建最小的安全接口。
 
@@ -616,7 +616,7 @@ pub mod safe_api {
 
 ### 3.3.4 Avoid complex type bounds with custom traits
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：当 trait bounds 过于复杂时，引入新 trait 来简化。
 
@@ -666,7 +666,7 @@ struct Value<G: Getter, S: Fn(&G::Output) -> Status> { /* ... */ }
 
 ### 3.4.1 Object-Based APIs
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：设计 FFI API 时，采用"基于对象的 API"模式，明确所有权和生命周期边界。
 
@@ -726,7 +726,7 @@ pub extern "C" fn dbm_process(db: *mut Dbm) {
 
 ### 3.4.2 Type Consolidation into Wrappers
 
-> **状态**: ✅ 已完成
+> 状态：已完成
 
 **核心**：将多个相关类型合并到一个"包装器类型"中，最小化内存不安全的风险。
 

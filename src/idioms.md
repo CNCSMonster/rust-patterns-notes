@@ -1,10 +1,10 @@
 # Rust Idioms 学习笔记
 
-> 📚 来源：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/idioms.html)
+> 来源：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/idioms.html)
 >
 > 原文版本：`main@f279f35` (2026-03-29 查验)
 >
-> ✅ 完成日期：2026-03-22
+> 完成日期：2026-03-22
 
 ---
 
