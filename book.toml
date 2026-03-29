@@ -15,8 +15,10 @@ edition = "2024"
 smart-punctuation = true
 default-theme = "light"
 site-url = "/rust-patterns-notes/"
-git-repository-url = "https://github.com/YOUR_USERNAME/rust-patterns-notes"
-edit-url-template = "https://github.com/YOUR_USERNAME/rust-patterns-notes/edit/main/src/{path}"
+git-repository-url = "https://github.com/CNCSMonster/rust-patterns-notes"
+edit-url-template = "https://github.com/CNCSMonster/rust-patterns-notes/edit/main/src/{path}"
+
+[output.mdbook-zh-search]
 
 [output.html.fold]
 enable = true
