@@ -55,16 +55,14 @@
 
 ### 3.1.1 Command
 
-> 状态：已完成
-
 **核心**：把请求封装成对象，Rust 中用 trait 或闭包实现。
 
 **代码示例**:
 
 ```rust
 // trait 方式
-trait Command { 
-    fn execute(&self); 
+trait Command {
+    fn execute(&self);
 }
 let cmds: Vec<Box<dyn Command>> = vec![...];
 
@@ -73,19 +71,11 @@ type Cmd = Box<dyn Fn()>;
 let cmds: Vec<Cmd> = vec![...];
 ```
 
-**关键总结**:
-- 封装请求为对象
-- 闭包方式更简洁
-- 应用：任务队列、撤销/重做、宏录制
-
-**一句话总结**:
-> 把请求封装成对象，闭包方式比 trait 更简洁。
+**应用**：任务队列、撤销/重做、宏录制
 
 ---
 
 ### 3.1.2 Interpreter
-
-> 状态：已完成
 
 **核心**：用枚举 + 递归实现 DSL 解释器。
 
@@ -115,19 +105,9 @@ impl Expr {
 | 静态检查禁止循环 | 配置类 DSL，规则引擎 |
 | 索引 + 两阶段构建 | 复杂 DSL，类型系统 |
 
-**关键总结**:
-- AST 用 `enum` 定义
-- 解释器用 `match` 递归
-- 循环引用：`Box` / 索引 / 静态检查
-
-**一句话总结**:
-> 用枚举定义 AST，用 match 递归实现解释器。
-
 ---
 
 ### 3.1.3 Newtype
-
-> 状态：已完成
 
 **核心**：用元组结构体包装类型，获得类型安全和自定义能力。
 
@@ -155,19 +135,9 @@ Email::new("test@example.com")?;  // 创建即保证有效
 - 语义清晰
 - 隔离不同领域
 
-**关键总结**:
-- 零开销抽象
-- 类型安全
-- 显式哲学（用类型系统把隐式假设变成显式保证）
-
-**一句话总结**:
-> 用元组结构体包装类型，实现类型安全和显式保证。
-
 ---
 
 ### 3.1.4 RAII Guards
-
-> 状态：已完成
 
 **核心**：用守卫对象在作用域结束时自动释放资源。
 
@@ -189,19 +159,9 @@ let guard = ScopeGuard::new(|| cleanup());
 - 借用检查：`Ref`/`RefMut`（运行时借用验证）
 - 作用域清理：`ScopeGuard`
 
-**关键总结**:
-- Guard = RAII 守卫对象
-- 获取可 async，释放通常同步
-- 需要 async 清理的资源用显式 `close()`
-
-**一句话总结**:
-> 用守卫对象在作用域结束时自动释放资源，获取可 async 释放通常同步。
-
 ---
 
 ### 3.1.5 Strategy
-
-> 状态：已完成
 
 **核心**：定义可互换的算法族，Rust 中用 trait 实现。
 
@@ -239,19 +199,9 @@ run_strategy(&|| println!("Hello"));
 | 泛型 | 性能优，内联 | 编译时确定 |
 | 闭包 + trait | 两者兼得 | 需要额外定义 |
 
-**关键总结**:
-- 定义 trait 抽象策略
-- 为闭包实现 trait（最灵活）
-- 兼得灵活性和类型安全
-
-**一句话总结**:
-> 定义 trait 抽象策略，为闭包实现 trait 最灵活。
-
 ---
 
 ### 3.1.6 Visitor
-
-> 状态：已完成
 
 **核心**：Visitor 封装了一个操作异构对象集合的算法，可以在不修改数据的情况下添加新算法。
 
@@ -324,22 +274,13 @@ impl<'de> Visitor<'de> for MyTypeVisitor {
 }
 ```
 
-**关键总结**:
-- 适用：异构数据 + 多算法
-- Rust 实现：trait + walk_*
-- 主要场景：serde 等序列化库
-- 高级用法：组合 Visitor（链式/包装/并行）
-
-**一句话总结**:
-> 封装操作异构对象的算法，解耦数据与算法，支持复用遍历逻辑。
+**适用**：异构数据 + 多算法；Rust 实现：trait + walk_*；主要场景：serde 等序列化库
 
 ---
 
 ## Creational Patterns
 
 ### 3.2.1 Builder
-
-> 状态：已完成
 
 **核心**：用 builder helper 构造对象，解决 Rust 无构造函数重载/默认参数的问题。
 
@@ -383,20 +324,9 @@ struct Foo {
 | 中等 | 手写 Builder |
 | 复杂 | `bon` crate |
 
-**关键总结**:
-- 适用：多参数/复杂构造
-- 简单场景 → 普通 `new()`
-- 复杂场景 → `bon` crate
-- 原文推荐 `derive_builder` 已过时
-
-**一句话总结**:
-> 多参数构造用 Builder，简单场景手写，复杂场景用 bon crate。
-
 ---
 
 ### 3.2.2 Fold
-
-> 状态：已完成
 
 **核心**：对 AST 递归转换，创建新数据结构。
 
@@ -441,29 +371,18 @@ impl VisitMut for MyTransform {
 - 宏展开
 - 常量折叠优化
 
-**关键总结**:
-- 适用：AST 递归转换
-- 场景：编译器/宏展开/优化传递
-- Iterator::fold() ≠ Fold 模式
-- 实际库：syn 用 VisitMut 模式
-
-**一句话总结**:
-> AST 递归转换模式，用于编译器/宏展开/优化传递。
-
 ---
 
 ## Structural Patterns
 
 ### 3.3.1 Compose Structs
 
-> 状态：已完成（⚠️ 原文有批评）
-
 **核心**：将大结构体拆分成多个小结构体再组合，实现独立借用字段。
 
 **⚠️ 原文示例问题**:
 
 ```rust
-// 原文示例：拆分后函数参数也变了
+// 原文示例：拆分后函数签名也变了
 fn print_database(
     connection_str: ConnectionString,  // 不再是 &Database
     timeout: Timeout,
@@ -496,19 +415,9 @@ let y = &d.b;  // 完全可以
 - 模块封装需求
 - 字段本身有复杂逻辑
 
-**关键总结**:
-> 💭 笔记作者观点：原文示例不严谨，为了凑模式而凑模式
-- 实用做法：destructuring 或直接借用字段
-- 真正需要拆分：trait 实现/类型安全/封装
-
-**一句话总结**:
-> 💭 笔记作者观点：原文为了凑模式而凑模式，实用做法是 destructuring 或直接借用字段。
-
 ---
 
 ### 3.3.2 Prefer Small Crates
-
-> 状态：已完成
 
 **核心**：优先使用小而专注的 crate，每个 crate 做好一件事。
 
@@ -556,20 +465,11 @@ my-lib/
 └── my-lib/         # 主 crate
 ```
 
-**关键总结**:
-- 原则：如无必要则不拆
-- 要拆则：完善设计 + 完善测试
-- 目标：减少版本冲突风险
-- 平衡：避免过度工程化 vs 模块化复用
-
-**一句话总结**:
-> 如无必要则不拆，要拆则完善设计 + 测试，减少版本冲突风险。
+**原则**：如无必要则不拆，要拆则完善设计 + 测试，减少版本冲突风险
 
 ---
 
 ### 3.3.3 Contain unsafety in small modules
-
-> 状态：已完成
 
 **核心**：将 `unsafe` 代码限制在尽可能小的模块内，构建最小的安全接口。
 
@@ -603,20 +503,11 @@ pub mod safe_api {
   3. 明确安全和不安全的边界
   4. 同时通过 unsafe 提供足够的底层掌控和性能优化空间
 
-**关键总结**:
-- Rust 真正重要的设计模式
-- unsafe 集中、接口安全、不变量明确
-- 场景：FFI/原始指针/并发原语
-- 标准库例子：Vec/String/Cell/Mutex
-
-**一句话总结**:
-> unsafe 代码集中到小模块，集中检查和提供安全保证，明确安全边界。
+**场景**：FFI/原始指针/并发原语；标准库例子：Vec/String/Cell/Mutex
 
 ---
 
 ### 3.3.4 Avoid complex type bounds with custom traits
-
-> 状态：已完成
 
 **核心**：当 trait bounds 过于复杂时，引入新 trait 来简化。
 
@@ -649,24 +540,13 @@ struct Value<G: Getter, S: Fn(&G::Output) -> Status> { /* ... */ }
 - 可读性：`FnMut() -> Result<T, Error>` → `Getter`
 - 类型擦除：容易 (`Box<dyn Getter>`)
 
-**用户观点**:
-- 用一个 trait 来把复杂的 trait bound 中若干约束集中到一起
-
-**关键总结**:
-- 用命名 trait 替代复杂 bounds
-- 优势：简化/可读/类型擦除
-- 场景：重复 bound/需要 dyn/命名行为
-
-**一句话总结**:
-> 用一个 trait 把复杂的 trait bound 中若干约束集中到一起。
+**用户观点**：用一个 trait 来把复杂的 trait bound 中若干约束集中到一起
 
 ---
 
 ## FFI Patterns
 
 ### 3.4.1 Object-Based APIs
-
-> 状态：已完成
 
 **核心**：设计 FFI API 时，采用"基于对象的 API"模式，明确所有权和生命周期边界。
 
@@ -711,22 +591,11 @@ pub extern "C" fn dbm_process(db: *mut Dbm) {
 }
 ```
 
-**关键总结**:
-| 方面 | 要点 |
-|------|------|
-| 核心 | Encapsulated(Rust 拥有) + Transactional(用户拥有) |
-| 优势 | unsafe 只在边界，内部 safe |
-| 劣势 | API 表达力降低、设计复杂 |
-| 场景 | FFI 库设计 |
-
-**一句话总结**:
-> 让 Rust 内部代码操作 Rust 自己拥有的数据，这样内部可以是 safe 的；unsafe 只用于在边界处转换外部指针。
+**核心**：Encapsulated(Rust 拥有) + Transactional(用户拥有)；unsafe 只在边界，内部 safe
 
 ---
 
 ### 3.4.2 Type Consolidation into Wrappers
-
-> 状态：已完成
 
 **核心**：将多个相关类型合并到一个"包装器类型"中，最小化内存不安全的风险。
 
@@ -771,17 +640,6 @@ impl MySetWrapper {
 - 对于 `HashSet`/`HashMap` 等容器，每次 `nth()` 是 O(n)，总体 O(n²)
 - 仅适用于支持随机访问的容器（如 `Vec`）
 - 原文：真正安全的实现 "incredibly difficult"
-
-**关键总结**:
-| 方面 | 要点 |
-|------|------|
-| 核心 | 将复杂生命周期内嵌为简单状态 |
-| 优势 | 生命周期自动管理、减少 unsafe |
-| 劣势 | 包装复杂、可能效率低 |
-| 场景 | FFI 导出迭代器/复杂状态 |
-
-**一句话总结**:
-> 把"持有引用的迭代器"变成"带状态索引的包装器"，绕过生命周期限制，实现跨 FFI 的安全迭代。
 
 ---
 

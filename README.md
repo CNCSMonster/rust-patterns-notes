@@ -3,8 +3,6 @@
 [![Deploy](https://github.com/YOUR_USERNAME/rust-patterns-notes/actions/workflows/deploy.yml/badge.svg)](https://github.com/YOUR_USERNAME/rust-patterns-notes/actions/workflows/deploy.yml)
 
 > 📚 学习来源：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/)
->
-> ✅ 完成日期：2026-03-29
 
 ---
 

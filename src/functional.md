@@ -26,8 +26,6 @@
 
 ## 5.1 Programming paradigms
 
-> 状态：已完成
-
 **核心**：**命令式**描述"如何做"，**声明式**描述"做什么"。
 
 **命令式示例**：
@@ -57,19 +55,11 @@ println!("{}", (1..11).fold(0, |a, b| a + b));
 | 思维 | 步骤序列 | 函数组合 |
 | Rust 中的体现 | `for`/`while` 循环 | `iter().map().fold()` |
 
-**关键总结**:
-- 命令式：描述如何做，显式状态变化
-- 声明式：描述做什么，函数组合
-- Rust 鼓励声明式：Iterator 链式调用
-
-**一句话总结**:
-> 命令式描述如何做，声明式描述做什么。
+**Rust 鼓励声明式：Iterator 链式调用**
 
 ---
 
 ## 5.2 Generics as Type Classes
-
-> 状态：已完成
 
 **核心**：Rust 的泛型设计更像函数式语言（如 Haskell），泛型参数实际上是**类型类约束**，不同的泛型参数会创建**不同的类型**。
 
@@ -182,20 +172,11 @@ request.mount_point();  // ❌ 编译错误！
 - 需要"分割 API" → 考虑 Builder Pattern
 - API 相同仅行为不同 → 考虑 Strategy Pattern
 
-**关键总结**：
-- 泛型 = 类型类约束，不同参数 = 不同类型
-- 优势：编译时检查、代码组织清晰
-- 代价：二进制大小增加
-- 应用：Type State、嵌入式、HTTP 客户端等
-
-**一句话总结**：
-> 用泛型将运行时决策移到编译时，让类型系统帮你检查错误，代价是二进制大小增加。
+**泛型 = 类型类约束，不同参数 = 不同类型；优势是编译时检查，代价是二进制大小增加**
 
 ---
 
 ## 5.3 Functional Optics
-
-> 状态：已完成
 
 **核心**：Optics（光学/透镜）是函数式语言的 API 设计模式，用于组合行为和属性。Rust 不直接支持 Optics，但这个概念有助于理解某些 API（如 Serde）。
 
@@ -288,13 +269,13 @@ pub trait Visitor<'de> {
 
 ```rust
 pub trait Visitor<'de> {
-    // 复杂类型：需要中间访问层
+    // 复杂类型：需要进一步访问，按需解析
     fn visit_map<V>(self, visitor: V) -> Result<Self::Value, V::Error>
     where V: MapAccess<'de>;
-    
+
     fn visit_seq<V>(self, visitor: V) -> Result<Self::Value, V::Error>
     where V: SeqAccess<'de>;
-    
+
     fn visit_enum<V>(self, visitor: V) -> Result<Self::Value, V::Error>
     where V: EnumAccess<'de>;
 }
@@ -304,7 +285,7 @@ pub trait Visitor<'de> {
 - 基础类型：值已解析完成，直接传递
 - 复杂类型：需要进一步访问，按需解析
 
-### 中间访问层：MapAccess
+### MapAccess 的作用
 
 **为什么需要 MapAccess**：
 
@@ -376,16 +357,7 @@ let user: User = serde_json::from_str(json)?;
 
 **优势**：N 个数据类型 × M 个格式 = N + M 次实现（而非 N×M）
 
-**关键总结**：
-- Optics 是函数式 API 设计模式
-- Rust 通过 trait + 泛型间接实现
-- Serde 用 Prism 概念分离关注点
-- 数据访问层：基础类型直接传值，复杂类型用访问 trait
-- MapAccess 解耦 Visitor 和 Deserializer，支持按需解析
-- 核心机制：Deserializer 反向调用 Visitor
-
-**一句话总结**：
-> Optics 是函数式的组合 API 模式，Serde 通过三层架构（Deserialize + Visitor + Deserializer）和数据访问层（基础类型直传 + MapAccess 等 trait）实现 Prism，让数据类型和格式解耦，Deserializer 反向调用 Visitor 是核心机制。
+**Serde 通过三层架构（Deserialize + Visitor + Deserializer）和数据访问层（MapAccess 等 trait）实现 Prism，让数据类型和格式解耦**
 
 ---
 
@@ -413,8 +385,8 @@ let user: User = serde_json::from_str(json)?;
    - 数据访问层：
      - 基础类型：直接传值（`visit_u64`, `visit_str`）
      - 复杂类型：访问 trait（`MapAccess`, `SeqAccess`, `EnumAccess`）
-   - 核心机制：Deserializer 反向调用 Visitor
    - MapAccess 解耦 Visitor 和 Deserializer，支持按需解析
+   - 核心机制：Deserializer 反向调用 Visitor
 
 ### 实践指导
 
