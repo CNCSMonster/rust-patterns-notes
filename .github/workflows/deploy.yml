@@ -24,15 +24,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install mdBook and mdbook-zh-search
+      - name: Install mdbook-zh-search
         run: |
-          cargo install mdbook
           cargo install --git https://github.com/cncsmonster/mdbook-zh-search
 
       - name: Build book
         run: |
           cd rust-patterns-notes
-          mdbook build
+          mdbook-zh-search build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

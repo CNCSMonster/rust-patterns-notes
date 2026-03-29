@@ -18,8 +18,6 @@ site-url = "/rust-patterns-notes/"
 git-repository-url = "https://github.com/CNCSMonster/rust-patterns-notes"
 edit-url-template = "https://github.com/CNCSMonster/rust-patterns-notes/edit/main/src/{path}"
 
-[output.mdbook-zh-search]
-
 [output.html.fold]
 enable = true
 level = 1
