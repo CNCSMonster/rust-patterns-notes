@@ -1,6 +1,8 @@
 # 补充资源笔记 - Refactoring & Design Principles
 
-> 学习来源：Rust Patterns - Additional Resources
+> 学习来源：[Rust Patterns - Additional Resources](https://rust-unofficial.github.io/patterns/additional.html)
+>
+> 原文版本：`main@f279f35` (2026-03-29 查验)
 >
 > 创建日期：2026-03-29
 

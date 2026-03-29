@@ -2,6 +2,8 @@
 
 > 来源：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/functional-intro.html)
 >
+> 原文版本：`main@f279f35` (2026-03-29 查验)
+>
 > 部分：Part 4 - Functional Programming (函数式编程)
 
 ---

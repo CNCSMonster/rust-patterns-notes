@@ -2,6 +2,8 @@
 
 > 来源：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/)
 >
+> 原文版本：`main@f279f35` (2026-03-29 查验)
+>
 > 整理日期：2026-03-22
 > 完成日期：2026-03-29
 
