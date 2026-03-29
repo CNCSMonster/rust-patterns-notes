@@ -280,11 +280,13 @@ resource.close().await?;
 
 ---
 
-## 2.7 mem::{take, replace}
+## 2.7 mem::{take, replace} - 所有权交换
 
 ### 核心原则
 
-**所有权交换，不拷贝地替换值。**
+**不拷贝地替换值，实现所有权交换。**
+
+> 💡 比喻：像印第安纳琼斯用沙袋替换神器——拿走原物，留下替代品。
 
 ### 函数对比
 
@@ -294,7 +296,7 @@ resource.close().await?;
 | `mem::take(&mut a)` | 拿走 a，留下 `default()` | `replace(&mut a, Default::default())` |
 | `Option::take()` | 拿走 Option，留下 `None` | `replace(&mut opt, None)` |
 
-### 使用场景
+### 常见场景
 
 ```rust
 // 1. 状态机中拿走状态
@@ -307,6 +309,30 @@ let value = opt.take().unwrap_or_default();
 let old = mem::replace(&mut self.config, new_config);
 ```
 
+### 进阶场景：Enum 变体切换
+
+原文核心用例：**在 enum 变体之间切换时，不 clone 地提取字段**。
+
+```rust
+use std::mem;
+
+enum MyEnum {
+    A { name: String, x: u8 },
+    B { name: String },
+}
+
+// A → B 变体切换，不 clone name
+fn a_to_b(e: &mut MyEnum) {
+    if let MyEnum::A { name, x: 0 } = e {
+        *e = MyEnum::B {
+            name: mem::take(name),  // 拿走 name，留下空 String
+        }
+    }
+}
+```
+
+**为什么需要**：借用检查器不允许直接从 `&mut` 中拿走值（必须有东西占位），`mem::take` 用默认值占位，返回所有权。
+
 ### 关系图
 
 ```
@@ -317,6 +343,15 @@ mem::replace  ← 最底层
    │       │
 mem::take  Option::take()
 ```
+
+### 关键总结
+
+| 方面 | 说明 |
+|------|------|
+| 核心 | 所有权交换，避免 clone |
+| 常见场景 | 状态机、Option 取值、配置替换 |
+| 进阶场景 | enum 变体切换（原文重点） |
+| 要求 | 类型需实现 `Default`（`mem::take`） |
 
 ---
 
