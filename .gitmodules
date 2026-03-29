@@ -1,0 +1,3 @@
+[submodule "patterns-source"]
+	path = patterns-source
+	url = https://github.com/rust-unofficial/patterns.git
