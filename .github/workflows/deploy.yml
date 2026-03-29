@@ -26,7 +26,7 @@ jobs:
 
       - name: Install mdbook-zh-search
         run: |
-          cargo install --git https://github.com/cncsmonster/mdbook-zh-search
+          cargo install --git https://github.com/cncsmonster/mdbook-zh-search mdbook
 
       - name: Build book
         run: |
