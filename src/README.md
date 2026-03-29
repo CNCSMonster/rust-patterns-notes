@@ -1,161 +1,34 @@
-# Rust Design Patterns - 整体结构梳理
+# Rust Patterns 学习笔记
 
-> 来源：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/)
+> 基于 [Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/) 的学习笔记
 >
 > 原文版本：`main@f279f35` (2026-03-29 查验)
->
-> 整理日期：2026-03-22
-> 完成日期：2026-03-29
 
 ---
 
-## 📖 书籍概述
+## 📖 关于
 
-**Rust Design Patterns** 是一本关于 Rust 设计模式和习惯用法的开源书籍，旨在帮助开发者编写更地道、更高效的 Rust 代码。
+本笔记记录笔者学习 Rust Design Patterns 的理解和心得，包括：
 
-### 核心概念
-
-书籍内容分为三大类：
-
-| 类型 | 说明 |
-|------|------|
-| **Idioms（习惯用法）** | Rust 社区的编码规范，代表社区共识的最佳实践。除非有充分理由，否则应遵循。 |
-| **Design Patterns（设计模式）** | 解决常见编程问题的方法和模式。 |
-| **Anti-Patterns（反模式）** | 看似能解决问题，但实际上会造成更多问题的做法，应避免。 |
+- ✅ **认同的观点** - 原文的核心思想和最佳实践
+- 💡 **补充示例** - 笔者觉得更好的代码示例
+- ⚠️ **批评意见** - 笔者认为不严谨或有误的地方（标注为 `💭 笔记作者观点`）
 
 ---
 
-## 📚 完整目录结构
+## 📚 笔记导航
 
-> **📝 编号说明**：原文没有数字编号，笔记中的编号（如 2.1、3.1.1）是为了方便引用而自创的，与原文章节名称对应关系见下表。
+> **📝 编号说明**：原文没有数字编号，笔记中的编号（如 2.1、3.1.1）是为了方便引用而自创的。
 
-### 1. Introduction（引言）
-- 1.1 Translations（翻译版本）
-
----
-
-### 2. Idioms（习惯用法）
-
-> 日常编码中应遵循的 Rust 最佳实践
-
-| 编号 | 主题 | 说明 |
-|------|------|------|
-| 2.1 | Use borrowed types for arguments | 参数使用借用类型 |
-| 2.2 | Concatenating Strings with format! | 使用 format! 拼接字符串 |
-| 2.3 | Constructor | 构造函数模式 |
-| 2.4 | The Default Trait | Default trait 的使用 |
-| 2.5 | Collections Are Smart Pointers | 集合是智能指针 |
-| 2.6 | Finalisation in Destructors | 析构函数中的收尾工作 |
-| 2.7 | mem::{take(_), replace(_)} | 内存操作工具 |
-| 2.8 | On-Stack Dynamic Dispatch | 栈上动态分发 |
-| 2.9 | Foreign function interface (FFI) | FFI 相关习惯 |
-| 2.9.1 | └─ Idiomatic Errors | 习惯性的错误处理 |
-| 2.9.2 | └─ Accepting Strings | 接收字符串 |
-| 2.9.3 | └─ Passing Strings | 传递字符串 |
-| 2.10 | Iterating over an Option | 遍历 Option |
-| 2.11 | Pass Variables to Closure | 向闭包传递变量 |
-| 2.12 | Privacy For Extensibility | 为可扩展性设计隐私 |
-| 2.13 | Easy doc initialization | 简易文档初始化 |
-| 2.14 | Temporary mutability | 临时可变性 |
-| 2.15 | Return consumed arg on error | 错误时返回已消费参数 |
-
----
-
-### 3. Design Patterns（设计模式）
-
-#### 3.1 Behavioural Patterns（行为型模式）
-
-| 编号 | 主题 | 说明 |
-|------|------|------|
-| 3.1.1 | Command | 命令模式 |
-| 3.1.2 | Interpreter | 解释器模式 |
-| 3.1.3 | Newtype | 新类型模式 |
-| 3.1.4 | RAII Guards | RAII 守卫模式 |
-| 3.1.5 | Strategy | 策略模式 |
-| 3.1.6 | Visitor | 访问者模式 |
-
-#### 3.2 Creational Patterns（创建型模式）
-
-| 编号 | 主题 | 说明 |
-|------|------|------|
-| 3.2.1 | Builder | 构建者模式 |
-| 3.2.2 | Fold | 折叠模式 |
-
-#### 3.3 Structural Patterns（结构型模式）
-
-| 编号 | 主题 | 说明 |
-|------|------|------|
-| 3.3.1 | Compose Structs | 组合结构体 |
-| 3.3.2 | Prefer Small Crates | 优先使用小 crate |
-| 3.3.3 | Contain unsafety in small modules | 在小模块中封装 unsafe |
-| 3.3.4 | Avoid complex type bounds with custom traits | 使用自定义 trait 避免复杂类型约束 |
-
-#### 3.4 Foreign Function Interface (FFI)
-
-| 编号 | 主题 | 说明 |
-|------|------|------|
-| 3.4.1 | Object-Based APIs | 基于对象的 API |
-| 3.4.2 | Type Consolidation into Wrappers | 类型整合到包装器 |
-
----
-
-### 4. Anti-Patterns（反模式）
-
-> 应避免的常见错误做法
-
-| 编号 | 主题 | 说明 |
-|------|------|------|
-| 4.1 | Clone to satisfy the borrow checker | 用 Clone 绕过借用检查器 |
-| 4.2 | #[deny(warnings)] | 使用 #[deny(warnings)] |
-| 4.3 | Deref Polymorphism | Deref 多态 |
-
----
-
-### 5. Functional Programming（函数式编程）
-
-| 编号 | 主题 | 说明 |
-|------|------|------|
-| 5.1 | Programming paradigms | 编程范式 |
-| 5.2 | Generics as Type Classes | 泛型作为类型类 |
-| 5.3 | Functional Optics | 函数式光学 |
-
----
-
-### 6. Additional Resources（额外资源）
-
-| 编号 | 主题 | 说明 |
-|------|------|------|
-| 6.1 | Design principles | 设计原则 |
-
----
-
-## 📊 统计概览
-
-| 类别 | 小节数量 |
-|------|----------|
-| Idioms | 15 |
-| Design Patterns - Behavioural | 6 |
-| Design Patterns - Creational | 2 |
-| Design Patterns - Structural | 4 |
-| Design Patterns - FFI | 2 |
-| Anti-Patterns | 3 |
-| Functional Programming | 3 |
-| Additional Resources | 2 |
-| **总计** | **37** |
-
----
-
-## 📅 更新记录
-
-- **2025-12-14**: 新增模式 - *Use custom traits to avoid complex type bounds*
-- **2024-03-17**: 新增 PDF 下载格式
-
----
-
-## 🔗 相关链接
-
-- 官方网站：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/)
-- GitHub 仓库：[rust-unofficial/patterns](https://github.com/rust-unofficial/patterns)
+| 部分 | 文档 | 内容 | 小节数 |
+|------|------|------|--------|
+| 导航 | [SUMMARY.md](./SUMMARY.md) | mdBook 导航文件 | - |
+| Part 1 | [idioms.md](./idioms.md) | 习惯用法 - Rust 编码规范 | 15 |
+| Part 2 | [design-patterns.md](./design-patterns.md) | 设计模式 | 14 |
+| Part 3 | [anti-patterns.md](./anti-patterns.md) | 反模式 | 3 |
+| Part 4 | [functional.md](./functional.md) | 函数式编程 | 3 |
+| Part 5 | [supplementary.md](./supplementary.md) | 补充资源（重构 + 设计原则） | 2 |
+| **总计** | | | **37** |
 
 ---
 
@@ -164,20 +37,13 @@
 | 英文 | 中文翻译 | 说明 |
 |------|----------|------|
 | Idioms | 习惯用法 | Rust 社区的编码规范和最佳实践 |
-| Design Patterns | 设计模式 | 解决常见编程问题的经典方法 |
-| Anti-Patterns | 反模式 | 应该避免的错误做法 |
 | Borrow Checker | 借用检查器 | Rust 编译器中负责检查借用规则的组件 |
 | Trait | trait | Rust 中的接口/特征机制（不翻译） |
 | Monomorphization | 单体化 | 编译时为每个具体类型生成独立代码 |
-| Smart Pointer | 智能指针 | 拥有堆分配数据所有权的类型（如 `Vec`, `String`） |
 | RAII | RAII | 资源获取即初始化，Rust 的资源管理模式 |
-| FFI | FFI | 外部函数接口（Foreign Function Interface） |
-| Closure | 闭包 | 捕获环境变量的匿名函数 |
-| Iterator | 迭代器 | 支持 `iter()`, `map()`, `fold()` 等链式调用的类型 |
-| Ownership | 所有权 | Rust 的内存管理机制 |
 | Move Semantics | Move 语义 | 赋值时转移所有权而非拷贝 |
-| Deref | Deref | 解引用 trait，用于智能指针 |
-| Drop | Drop | 析构 trait，用于资源清理 |
+
+完整术语表见 [主项目 README](../README.md#术语表)。
 
 ---
 
@@ -226,3 +92,11 @@
 - 重构原则：先设计再重构，无测试不重构，拆分环节设置检查点
 - SOLID 原则：Rust 中的新理解（LSP = trait 契约一致性）
 - 其他设计原则：18 个原则的 Rust 体现和实践
+
+---
+
+## 🔗 相关链接
+
+- **原书**: [Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/)
+- **GitHub**: [rust-unofficial/patterns](https://github.com/rust-unofficial/patterns)
+- **Rust API Guidelines**: [https://rust-lang.github.io/api-guidelines](https://rust-lang.github.io/api-guidelines)
