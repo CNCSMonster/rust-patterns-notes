@@ -10,6 +10,10 @@
 
 本笔记是基于 [Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/) 一书的学习记录，涵盖了 Rust 编程中的习惯用法、设计模式、反模式以及函数式编程等内容。
 
+## 🛠️ 技术栈
+
+本项目使用 [mdbook-zh-search](https://github.com/cncsmonster/mdbook-zh-search) 构建，它是 mdBook 的增强版本，提供了更好的中文搜索支持。
+
 ## 🌐 在线阅读
 
 👉 **[https://cncsmonster.github.io/rust-patterns-notes/](https://cncsmonster.github.io/rust-patterns-notes/)**
