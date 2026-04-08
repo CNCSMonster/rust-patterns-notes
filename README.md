@@ -1,6 +1,6 @@
 # Rust Patterns 学习笔记
 
-[![Deploy](https://github.com/YOUR_USERNAME/rust-patterns-notes/actions/workflows/deploy.yml/badge.svg)](https://github.com/YOUR_USERNAME/rust-patterns-notes/actions/workflows/deploy.yml)
+[![Deploy](https://github.com/CNCSMonster/rust-patterns-notes/actions/workflows/deploy.yml/badge.svg)](https://github.com/CNCSMonster/rust-patterns-notes/actions/workflows/deploy.yml)
 
 > 📚 学习来源：[Rust Unofficial Patterns](https://rust-unofficial.github.io/patterns/)
 
@@ -12,7 +12,7 @@
 
 ## 🌐 在线阅读
 
-👉 **[https://YOUR_USERNAME.github.io/rust-patterns-notes/](https://YOUR_USERNAME.github.io/rust-patterns-notes/)**
+👉 **[https://cncsmonster.github.io/rust-patterns-notes/](https://cncsmonster.github.io/rust-patterns-notes/)**
 
 ## 📁 项目结构
 
